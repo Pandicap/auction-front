@@ -1,0 +1,63 @@
+<div class="login-wrapper">
+    <!-- <img src="assets/auction-title.png" class="app-title"/> -->
+    <form class="form-wrapper" (submit)="signup()" [formGroup]="registrationForm">
+      <h1>Sign up</h1>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-lg login-inputs"
+          placeholder="Name"
+          formControlName="firstName"
+        />
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-lg login-inputs"
+          placeholder="Last name"
+          formControlName="lastName"
+        />
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control form-control-lg login-inputs"
+          placeholder="Username"
+          formControlName="username"
+        />
+      </div>
+      <div class="input-group">
+        <input
+          type="email"
+          class="form-control form-control-lg login-inputs"
+          placeholder="Email"
+          formControlName="email"
+        />
+      </div>
+      @if (registrationForm.get('email')?.hasError('email')) {
+        <span class="invalid-message-feedback">Enter a valid email address!</span>
+      }
+      <div class="input-group">
+        <input
+          type="password"
+          class="form-control form-control-lg login-inputs"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </div>
+      <div class="input-group">
+        <input
+          type="password"
+          class="form-control form-control-lg login-inputs"
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+        />
+      </div>
+      @if (registrationForm.hasError('passwordMatch')) {
+        <span class="invalid-message-feedback">Passwords must match!</span>
+      }
+      <button class="btn btn-primary login-button" type="submit" [disabled]="registrationForm.invalid">Sign up</button>
+      <p>Already have an account? <a href="/register">Log in</a></p>
+    </form>
+  </div>
+  

@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
+
+.app {
+  background: #101010;
+  color: #ffffff;
+  font-family: "Montserrat";
+  --bs-body-font-family: "Montserrat";
+
+  form {
+    .input-group {
+      input.ng-invalid.ng-touched {
+        color: red;
+        border: red 0.05rem solid;
+      }
+
+      input.ng-invalid.ng-touched::placeholder {
+        color: red;
+      }
+    }
+
+    .invalid-message-feedback {
+      display: block;
+      position: relative;
+      width: 100%;
+      margin-top: -0.7rem;
+      font-size: 0.875rem;
+      color: red;
+    }
+  }
+}
