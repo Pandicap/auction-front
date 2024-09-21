@@ -23,9 +23,19 @@
       height: 3rem;
     }
 
+    .form-control.ng-invalid.ng-touched::placeholder {
+      color: red;
+    }
+
+    .form-control.ng-invalid.ng-touched {
+      // @extend .is-invalid !optional;
+      color: red;
+      border: red 0.05rem solid;
+    }
+
     .login-inputs::placeholder {
       color: #ffffff;
-      opacity: 0.5rem;
+      //opacity: 0.5%;
     }
 
     .login-button {

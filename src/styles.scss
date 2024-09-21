@@ -8,15 +8,39 @@
   --bs-body-font-family: "Montserrat";
 
   form {
-    .input-group {
-      input.ng-invalid.ng-touched {
-        color: red;
-        border: red 0.05rem solid;
-      }
+    //.input-group {
+    //  input.ng-invalid.ng-touched {
+    //    color: red;
+    //    border: red 0.05rem solid;
+    //  }
+    //
+    //  input.ng-invalid.ng-touched::placeholder {
+    //    color: red;
+    //  }
+    //}
 
-      input.ng-invalid.ng-touched::placeholder {
-        color: red;
-      }
+    input.form-control {
+      background: #24252d;
+      border: none;
+      color: #ffffff;
+      width: 25rem;
+      height: 3rem;
+    }
+
+    input::placeholder {
+      color: #ffffff;
+      opacity: 50%;
+    }
+
+    input.ng-invalid.ng-touched {
+      // @extend .is-invalid !optional;
+      color: red;
+      border: red 0.05rem solid;
+    }
+
+    input.ng-invalid.ng-touched::placeholder {
+      color: red;
+      opacity: 100%;
     }
 
     .invalid-message-feedback {

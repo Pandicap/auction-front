@@ -1,1 +1,41 @@
-<p>dashboard works!</p>
+<nav class="navbar navbar-dark bg-dark">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item nav-left">
+      <i class="bi bi-list"></i>
+    </li>
+    <li class="nav-item nav-center">
+      <img src="assets/auction-title.png" class="logo" />
+    </li>
+    <li class="nav-item nav-right">
+      <i class="bi bi-bell"></i>
+      <span>name surname</span>
+      <i class="bi bi-person-circle"></i>
+    </li>
+  </ul>
+</nav>
+
+<div class="main-layout">
+  <ul class="nav flex-column side-nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="auctions-list" routerLinkActive="active">
+        <i class="bi bi-house"></i>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="my-auctions" routerLinkActive="active">
+        <i class="bi bi-star"></i>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="my-bids" routerLinkActive="active">
+        <i class="bi bi-bag"></i>
+      </a>
+    </li>
+  </ul>
+
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

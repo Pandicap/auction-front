@@ -1,5 +1,5 @@
 <div class="login-wrapper">
-    <!-- <img src="assets/auction-title.png" class="app-title"/> -->
+     <img src="assets/auction-title.png" class="app-title"/>
     <form class="form-wrapper" (submit)="signup()" [formGroup]="registrationForm">
       <h1>Sign up</h1>
       <div class="input-group">
@@ -57,7 +57,6 @@
         <span class="invalid-message-feedback">Passwords must match!</span>
       }
       <button class="btn btn-primary login-button" type="submit" [disabled]="registrationForm.invalid">Sign up</button>
-      <p>Already have an account? <a href="/register">Log in</a></p>
+      <p>Already have an account? <a href="/login">Log in</a></p>
     </form>
   </div>
-  

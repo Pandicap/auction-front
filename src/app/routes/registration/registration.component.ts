@@ -7,6 +7,9 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({
   selector: 'app-registration',
@@ -18,7 +21,12 @@ import {
 export class RegistrationComponent {
   registrationForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private localStorageService: LocalStorageService,
+  ) {
     this.registrationForm = fb.group(
       {
         firstName: ['', Validators.required],
@@ -28,7 +36,9 @@ export class RegistrationComponent {
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
       },
-      { validators: this.passwordMatchValidator('password', 'confirmPassword') }
+      {
+        validators: this.passwordMatchValidator('password', 'confirmPassword'),
+      },
     );
   }
 
@@ -53,6 +63,11 @@ export class RegistrationComponent {
   }
 
   signup() {
-
+    const signupData = this.registrationForm.getRawValue();
+    delete signupData.confirmPassword;
+    this.authService.signup(signupData).subscribe((res: any) => {
+      this.localStorageService.setItem('userToken', res.access_token);
+      this.router.navigate(['/auction']);
+    });
   }
 }

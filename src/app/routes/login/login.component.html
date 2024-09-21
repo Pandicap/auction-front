@@ -1,12 +1,13 @@
 <div class="login-wrapper">
-  <!-- <img src="assets/auction-title.png" class="app-title"/> -->
-  <form class="form-wrapper" (submit)="login()">
+   <img src="assets/auction-title.png" class="app-title"/>
+  <form class="form-wrapper" (submit)="login()" [formGroup]="loginForm">
     <h1>Login</h1>
     <div class="input-group">
       <input
         type="text"
         class="form-control form-control-lg login-inputs"
         placeholder="Username"
+        formControlName="username"
       />
     </div>
     <div class="input-group">
@@ -14,6 +15,7 @@
         type="password"
         class="form-control form-control-lg login-inputs"
         placeholder="Password"
+        formControlName="password"
       />
     </div>
     <button class="btn btn-primary login-button" type="submit">Login</button>
