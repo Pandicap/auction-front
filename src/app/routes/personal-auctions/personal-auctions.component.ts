@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuctionsService} from "../../services/auctions.service";
 
 @Component({
   selector: 'app-personal-auctions',
@@ -9,4 +10,12 @@ import { Component } from '@angular/core';
 })
 export class PersonalAuctionsComponent {
 
+  constructor(private auctionService: AuctionsService) {
+  }
+
+  ngOnInit(): void {
+    this.auctionService.getAuctionForUser().subscribe((result: any) => {
+      console.log(result);
+    });
+  }
 }

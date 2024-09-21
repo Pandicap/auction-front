@@ -63,3 +63,59 @@
     <button class="btn btn-primary" (click)="addNewAuction()">Save</button>
   </div>
 </p-dialog>
+
+@if (detailObject) {
+  <p-dialog
+    header="Auction Details"
+    [modal]="true"
+    [(visible)]="bidDialogVisible"
+    position="right"
+    class="test"
+    [style]="{ width: '40rem', height: '100vh' }"
+  >
+    <div class="d-flex flex-column align-items-start">
+      <h3>{{ detailObject.title }}</h3>
+      <div class="d-flex gap-3">
+        <img
+          class="detail-img"
+          [src]="
+            'https://primefaces.org/cdn/primeng/images/demo/product/black-watch.jpg'
+          "
+          [alt]="detailObject.title"
+        />
+        <div class="d-flex flex-column">
+          @if (detailObject.user) {
+            <span
+              >Created by: {{ detailObject.user.firstName }}
+              {{ detailObject.user.lastName }}</span
+            >
+            <span>Email: {{ detailObject.user.email }}</span>
+            <span class="pt-3">{{ detailObject.description }}</span>
+          }
+        </div>
+      </div>
+      <div class="d-flex justify-content-between pt-5" style="width: 100%">
+        <span>Ends in: {{ detailObject.endTime }}</span>
+        <div class="d-flex flex-column justify-content-between align-items-end">
+          <span>Starting price: ${{ detailObject.startingPrice }}</span>
+          <span>Last bid: ${{ detailObject.startingPrice }}</span>
+          <form class="pt-3" [formGroup]="bidForm">
+            <input
+              class="form-control"
+              type="number"
+              placeholder="Bid amount $"
+              formControlName="amount"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 pt-3">
+      <button class="btn btn-secondary" (click)="bidDialogVisible = false">
+        Cancel
+      </button>
+      <button class="btn btn-primary" (click)="bid()">Bid</button>
+    </div>
+  </p-dialog>
+}
