@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-end gap-3 pb-3">
+  <button class="btn btn-primary" (click)="addNew()">Add new</button>
+</div>
+<div class="card">
+  <p-dataView #dv [value]="data" [rows]="3" [paginator]="true">
+    <ng-template pTemplate="list" let-data>
+      <div>
+        @for (item of data; track item.id) {
+          <div class="d-flex justify-content-between align-items-start" style="cursor: pointer" (click)="openDetails(item.id)">
+            <div class="d-flex gap-3">
+              <img
+                class="grid-images"
+                [src]="
+                  'https://primefaces.org/cdn/primeng/images/demo/product/black-watch.jpg'
+                "
+                [alt]="item.name"
+              />
+              <div>
+              <h3>{{ item.title }}</h3>
+                @if (item.user) {
+                  <span>Created by: {{item?.user.username}}</span>
+                }
+              </div>
+            </div>
+            <div class="d-flex flex-column justify-content-between align-items-end" style="height: 10rem">
+              <h4 class="fw-bold">{{ "$" + item.startingPrice }}</h4>
+              <h5>{{item.endTime}}</h5>
+              <button class="btn btn-primary">Bid</button>
+            </div>
+          </div>
+          <hr />
+        }
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>
