@@ -34,7 +34,7 @@
         <div class="d-flex flex-column justify-content-between align-items-end">
           <span>Starting price: ${{ detailObject.auction.startingPrice }}</span>
           <span>Your bid: ${{ detailObject.amount }}</span>
-          <span>Last bid: ${{ detailObject.auction.startingPrice }}</span>
+          <span>Last bid: ${{ detailObject.auction.lastestBid }}</span>
           <form class="pt-3" [formGroup]="bidForm">
             <input
               class="form-control"

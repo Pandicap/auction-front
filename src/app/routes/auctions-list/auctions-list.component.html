@@ -43,7 +43,7 @@
     </div>
     <div class="input-group">
       <input
-        type="text"
+        type="date"
         class="form-control"
         placeholder="End Time"
         formControlName="endTime"
@@ -51,10 +51,12 @@
     </div>
     <div class="input-group">
       <input
-        type="text"
+        type="file"
         class="form-control"
         placeholder="Images"
-        formControlName="images"
+        [(ngModel)]="imageUrl"
+        (change)="onUpload($event)"
+        [ngModelOptions]="{standalone: true}"
       />
     </div>
   </form>

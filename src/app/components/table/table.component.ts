@@ -2,11 +2,12 @@ import { Component, Input, output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { DataViewModule } from 'primeng/dataview';
 import {DropdownModule} from "primeng/dropdown";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [ButtonModule, DataViewModule, DropdownModule],
+  imports: [ButtonModule, DataViewModule, DropdownModule, DatePipe],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
@@ -22,16 +23,16 @@ export class TableComponent {
 
   sortOrder: number = 0;
   sortField: string = '';
-  sortByBidOptions: any[] =[];
+  sortByBidOptions: any[] = [];
 
   onAddNew = output();
   onOpenDetails = output<number>();
 
   ngOnInit() {
     this.sortByBidOptions = [
-      {label: 'Last Bid High to Low', value: '!lastBidAmount'},
-      {label: 'Last Bid Low to High', value: 'lastBidAmount'},
-    ]
+      { label: 'Last Bid High to Low', value: '!lastBidAmount' },
+      { label: 'Last Bid Low to High', value: 'lastBidAmount' },
+    ];
   }
 
   onSortChange(event: any) {

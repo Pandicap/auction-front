@@ -24,7 +24,12 @@
               style="height: 4rem"
             >
               <span>Your bid: {{ "$" + item.amount }}</span>
-              <span>Last bid: {{ item.auction.startingPrice }}</span>
+              <span>Last bid: {{ item.auction.lastestBid }}</span>
+            </div>
+            <div class="d-flex w-50">
+            @if(item.isWinning) {
+            <ngx-paypal [config]="data.payPalConfig"></ngx-paypal>
+            }
             </div>
           </div>
           <hr />

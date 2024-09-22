@@ -39,9 +39,7 @@
             <div class="d-flex gap-3">
               <img
                 class="grid-images"
-                [src]="
-                  'https://primefaces.org/cdn/primeng/images/demo/product/black-watch.jpg'
-                "
+                [src]="item.images"
                 [alt]="item.title"
               />
               <div class="d-flex flex-column justify-content-between">
@@ -55,8 +53,8 @@
               style="height: 10rem"
             >
               <h4>Starting price: {{ "$" + item.startingPrice }}</h4>
-              <h4>Last bid: {{ "$" + item.startingPrice }}</h4>
-              <span style="color: red">Ends in: {{ item.endTime }}</span>
+              <h4>Last bid: {{ "$" + item.lastestBid }}</h4>
+              <span style="color: red">Ends in: {{ item.endTime | date: 'mediumDate' }}</span>
               @if (showBidButton) {
                 <button class="btn btn-primary" style="width: 10rem">
                   <i class="bi bi-bag"></i> Bid

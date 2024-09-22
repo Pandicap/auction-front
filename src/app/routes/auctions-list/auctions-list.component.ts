@@ -2,7 +2,7 @@ import { Component, output } from '@angular/core';
 import { TableComponent } from '../../components/table/table.component';
 import {
   FormBuilder,
-  FormGroup,
+  FormGroup, FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -10,11 +10,18 @@ import { AuctionsService } from '../../services/auctions.service';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { BidsService } from '../../services/bids.service';
+import {FileUploadHandlerEvent} from "primeng/fileupload";
 
 @Component({
   selector: 'app-auctions-list',
   standalone: true,
-  imports: [TableComponent, DialogModule, ButtonModule, ReactiveFormsModule],
+  imports: [
+    TableComponent,
+    DialogModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   templateUrl: './auctions-list.component.html',
   styleUrl: './auctions-list.component.scss',
 })
@@ -26,6 +33,7 @@ export class AuctionsListComponent {
   tableData: any;
   auctionId: number = 0;
   detailObject: any;
+  imageUrl: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -37,7 +45,6 @@ export class AuctionsListComponent {
       description: ['', Validators.required],
       startingPrice: ['', Validators.required],
       endTime: ['', Validators.required],
-      images: ['', Validators.required],
     });
     this.bidForm = fb.group({
       amount: ['', Validators.required],
@@ -57,16 +64,24 @@ export class AuctionsListComponent {
 
   addNewAuction() {
     const createAuctionData = this.addNewAuctionForm.getRawValue();
-    const imgArr = [];
-    imgArr.push({ value: createAuctionData.images });
     delete createAuctionData.images;
-    createAuctionData.images = imgArr;
+    createAuctionData.images = this.imageUrl;
     this.auctionsService
       .createAuction(createAuctionData)
       .subscribe((res: any) => {
         this.addDialogVisible = false;
         this.getTable();
       });
+  }
+
+  onUpload(event: any) {
+    console.log('onUpload', event);
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imageUrl = reader.result as string;
+    };
   }
 
   bid() {
@@ -76,7 +91,7 @@ export class AuctionsListComponent {
     this.bidsService.createBid(bidData).subscribe((res: any) => {
       this.bidDialogVisible = false;
       this.getTable();
-    })
+    });
   }
 
   openDetails(itemId: number) {
