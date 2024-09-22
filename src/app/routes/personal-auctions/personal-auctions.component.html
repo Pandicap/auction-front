@@ -1,1 +1,114 @@
-<p>personal-auctions works!</p>
+<app-table
+  tableTitle="My auctions"
+  [data]="tableData"
+  (onAddNew)="addDialogVisible = !addDialogVisible"
+  (onOpenDetails)="openDetails($event)"
+></app-table>
+<p-dialog
+  header="Create new auction"
+  [modal]="true"
+  [(visible)]="addDialogVisible"
+  position="right"
+  class="test"
+  [style]="{ width: '40rem', height: '100vh' }"
+>
+  <form
+    class="d-flex flex-column align-items-start gap-3 pt-3"
+    [formGroup]="addNewAuctionForm"
+  >
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Title"
+        formControlName="title"
+      />
+    </div>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Description"
+        formControlName="description"
+      />
+    </div>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Starting price"
+        formControlName="startingPrice"
+      />
+    </div>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="End Time"
+        formControlName="endTime"
+      />
+    </div>
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Images"
+        formControlName="images"
+      />
+    </div>
+  </form>
+  <div class="d-flex justify-content-end gap-2 pt-3">
+    <button class="btn btn-secondary" (click)="addDialogVisible = false">
+      Cancel
+    </button>
+    <button class="btn btn-primary" (click)="addNewAuction()">Save</button>
+  </div>
+</p-dialog>
+
+@if (detailObject) {
+  <p-dialog
+    header="Auction Details"
+    [modal]="true"
+    [(visible)]="bidDialogVisible"
+    position="right"
+    class="test"
+    [style]="{ width: '40rem', height: '100vh' }"
+  >
+    <div class="d-flex flex-column align-items-start">
+      <h3>{{ detailObject.title }}</h3>
+      <div class="d-flex gap-3">
+        <img
+          class="detail-img"
+          [src]="
+            'https://primefaces.org/cdn/primeng/images/demo/product/black-watch.jpg'
+          "
+          [alt]="detailObject.title"
+        />
+        <div class="d-flex flex-column">
+          @if (detailObject.user) {
+            <span
+            >Created by: {{ detailObject.user.firstName }}
+              {{ detailObject.user.lastName }}</span
+            >
+            <span>Email: {{ detailObject.user.email }}</span>
+            <span class="pt-3">{{ detailObject.description }}</span>
+          }
+        </div>
+      </div>
+      <div class="d-flex justify-content-between pt-5" style="width: 100%">
+        <span>Ends in: {{ detailObject.endTime }}</span>
+        <div class="d-flex flex-column justify-content-between align-items-end">
+          <span>Starting price: ${{ detailObject.startingPrice }}</span>
+          <span>Last bid: ${{ detailObject.startingPrice }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 pt-3">
+      <button class="btn btn-secondary" (click)="bidDialogVisible = false">
+        Cancel
+      </button>
+      <button class="btn btn-danger" (click)="delete(detailObject.id)">Delete</button>
+    </div>
+  </p-dialog>
+}

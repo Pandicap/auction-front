@@ -1,10 +1,33 @@
-<div class="d-flex justify-content-end gap-3 pb-3">
+<h3>{{ tableTitle }}</h3>
+<div class="d-flex justify-content-between align-items-end pb-3">
+  <div class="d-flex gap-3">
+    <select class="form-select" aria-label="Default select example" (change)="onSortChange($event)">
+      <option selected disabled value="0">Sort by last Bid</option>
+      @for (option of sortByBidOptions; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+    <select class="form-select" aria-label="Default select example">
+      <option selected disabled>Sort by Bid</option>
+      @for (option of sortByBidOptions; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  </div>
+
   <button class="btn btn-primary" (click)="addNew()">
     <i class="bi bi-plus-lg"></i> Add new
   </button>
 </div>
 <div class="card">
-  <p-dataView #dv [value]="data" [rows]="3" [paginator]="true">
+  <p-dataView
+    #dv
+    [value]="data"
+    [rows]="3"
+    [paginator]="true"
+    [sortField]="sortField"
+    [sortOrder]="sortOrder"
+  >
     <ng-template pTemplate="list" let-data>
       <div>
         @for (item of data; track item.id) {
@@ -23,9 +46,7 @@
               />
               <div class="d-flex flex-column justify-content-between">
                 <h3>{{ item.title }}</h3>
-                @if (item.user) {
-                  <span>Created by: {{ item.user.username }}</span>
-                }
+                <span>Created by: {{ item.user.username }}</span>
                 <span class="pt-5">Bids: {{ item.bids.length }}</span>
               </div>
             </div>
@@ -33,11 +54,14 @@
               class="d-flex flex-column justify-content-between align-items-end"
               style="height: 10rem"
             >
-              <h4 class="fw-bold">{{ "$" + item.startingPrice }}</h4>
-              <h5>{{ item.endTime }}</h5>
-              <button class="btn btn-primary" style="width: 10rem">
-                <i class="bi bi-bag"></i> Bid
-              </button>
+              <h4>Starting price: {{ "$" + item.startingPrice }}</h4>
+              <h4>Last bid: {{ "$" + item.startingPrice }}</h4>
+              <span style="color: red">Ends in: {{ item.endTime }}</span>
+              @if (showBidButton) {
+                <button class="btn btn-primary" style="width: 10rem">
+                  <i class="bi bi-bag"></i> Bid
+                </button>
+              }
             </div>
           </div>
           <hr />

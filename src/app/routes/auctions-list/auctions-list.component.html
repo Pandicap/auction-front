@@ -1,7 +1,9 @@
 <app-table
+  tableTitle="Auctions"
   [data]="tableData"
   (onAddNew)="addDialogVisible = !addDialogVisible"
   (onOpenDetails)="openDetails($event)"
+  [showBidButton]="true"
 ></app-table>
 <p-dialog
   header="Create new auction"

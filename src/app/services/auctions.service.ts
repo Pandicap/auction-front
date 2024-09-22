@@ -28,7 +28,7 @@ export class AuctionsService {
     return this.httpClient.delete(`${this.baseUrl}/auctions/${id}`);
   }
 
-  getAuctionForUser() {
-    return this.httpClient.get(`${this.baseUrl}/auctions/for-user/1`);
+  getAuctionsForUser() {
+    return this.httpClient.get(`${this.baseUrl}/auctions/for-user`);
   }
 }

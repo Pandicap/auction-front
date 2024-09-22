@@ -27,4 +27,8 @@ export class BidsService {
   deleteBid(id: number) {
     return this.httpClient.delete(`${this.baseUrl}/bids/${id}`);
   }
+
+  getBidsForUser() {
+    return this.httpClient.get(`${this.baseUrl}/bids/for-user`);
+  }
 }

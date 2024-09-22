@@ -52,4 +52,15 @@
       color: red;
     }
   }
+
+  select{
+    border: none;
+    color: #ffffff;
+    width: 25rem;
+    appearance: none;
+    -webkit-appearance: none;
+    background: #24252d url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 16 16" fill="white" %3E%3Cpath d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/%3E%3C/svg%3E') no-repeat right 1rem center;
+    background-size: 12px;
+  }
+
 }
