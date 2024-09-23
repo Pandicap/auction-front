@@ -31,4 +31,8 @@ export class BidsService {
   getBidsForUser() {
     return this.httpClient.get(`${this.baseUrl}/bids/for-user`);
   }
+
+  completePayment(id: number) {
+    return this.httpClient.patch(`${this.baseUrl}/bids/${id}`, id);
+  }
 }

@@ -42,11 +42,25 @@ export class PersonalBidsComponent {
   getTable() {
     this.bidsService.getBidsForUser().subscribe((table: any) => {
       console.log(table);
-      this.tableData = table.map((bid: any) => {
+      const highestBids = Object.values(
+        table.reduce((acc: any, bid: any) => {
+          const auctionId = bid.auction.id;
+          // If there is no existing entry or the current bid has a higher amount, update the entry
+          if (!acc[auctionId] || bid.amount > acc[auctionId].amount) {
+            acc[auctionId] = bid;
+          }
+          return acc;
+        }, {})
+      );
+
+      // this.tableData = highestBids
+
+      console.log('highest bids ', highestBids)
+      let tempData = highestBids.map((bid: any) => {
         return {
           ...bid,
           paypalConfig: {
-            currency: 'EUR',
+            currency: 'USD',
             clientId: 'AU6MFRGR5-BWiQ_iCfICnKGd1zrbByiUNjgP34OQIQxylWT9t0jjcXZVO1NlR68L6Svpp2jUkaNUwTHW',
             createOrderOnClient: (data: any) =>
               <ICreateOrderRequest>{
@@ -55,10 +69,10 @@ export class PersonalBidsComponent {
                   {
                     amount: {
                       currency_code: 'USD',
-                      value: bid.amount, // TODO: bid value
+                      value: bid.amount,
                       breakdown: {
                         item_total: {
-                          currency_code: 'EUR',
+                          currency_code: 'USD',
                           value: bid.amount,
                         },
                       },
@@ -82,12 +96,14 @@ export class PersonalBidsComponent {
             },
             style: {
               label: 'paypal',
-              layout: 'vertical',
+              layout: 'horizontal',
+              shape: 'rect',
+              color: 'gold',
+              size: 'small'
             },
             onApprove: (data: any, actions: any) => {
-              // TODO: send on be to update bid to paymentDone: true
+              this.bidsService.completePayment(bid.id);
               console.log('done', data, actions);
-              // http.post('bids/{bid.id}')
             },
             onCancel: (data: any, actions: any) => {
               console.log('OnCancel', data, actions);
@@ -104,6 +120,8 @@ export class PersonalBidsComponent {
           }
         }
       });
+      this.tableData = tempData
+    console.log('data after paypal config ', tempData, this.tableData)
     });
   }
 

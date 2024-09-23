@@ -11,6 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { BidsService } from '../../services/bids.service';
 import {FileUploadHandlerEvent} from "primeng/fileupload";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-auctions-list',
@@ -34,11 +35,13 @@ export class AuctionsListComponent {
   auctionId: number = 0;
   detailObject: any;
   imageUrl: string = '';
+  userId: number = 0;
 
   constructor(
     private fb: FormBuilder,
     private auctionsService: AuctionsService,
     private bidsService: BidsService,
+    private authService: AuthService,
   ) {
     this.addNewAuctionForm = fb.group({
       title: ['', Validators.required],
@@ -49,6 +52,9 @@ export class AuctionsListComponent {
     this.bidForm = fb.group({
       amount: ['', Validators.required],
     });
+    this.authService.getCurrentUser().subscribe((user: any) => {
+      this.userId = user.id;
+    })
   }
 
   ngOnInit(): void {
@@ -56,9 +62,9 @@ export class AuctionsListComponent {
   }
 
   getTable() {
+    console.log('user id ', this.userId)
     this.auctionsService.getAuctions().subscribe((res: any) => {
-      console.log(res);
-      this.tableData = res;
+      this.tableData = res.filter((el: any) => el.isValid && el.user.id !== this.userId);
     });
   }
 

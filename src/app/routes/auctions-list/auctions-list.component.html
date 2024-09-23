@@ -35,7 +35,7 @@
     </div>
     <div class="input-group">
       <input
-        type="text"
+        type="number"
         class="form-control"
         placeholder="Starting price"
         formControlName="startingPrice"
@@ -52,6 +52,7 @@
     <div class="input-group">
       <input
         type="file"
+        accept="image/png, image/gif, image/jpeg"
         class="form-control"
         placeholder="Images"
         [(ngModel)]="imageUrl"
@@ -82,9 +83,7 @@
       <div class="d-flex gap-3">
         <img
           class="detail-img"
-          [src]="
-            'https://primefaces.org/cdn/primeng/images/demo/product/black-watch.jpg'
-          "
+          [src]="detailObject.images"
           [alt]="detailObject.title"
         />
         <div class="d-flex flex-column">
@@ -102,7 +101,7 @@
         <span>Ends in: {{ detailObject.endTime }}</span>
         <div class="d-flex flex-column justify-content-between align-items-end">
           <span>Starting price: ${{ detailObject.startingPrice }}</span>
-          <span>Last bid: ${{ detailObject.startingPrice }}</span>
+          <span>Last bid: ${{ detailObject.lastestBid }}</span>
           <form class="pt-3" [formGroup]="bidForm">
             <input
               class="form-control"

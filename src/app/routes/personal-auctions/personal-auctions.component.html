@@ -34,7 +34,7 @@
     </div>
     <div class="input-group">
       <input
-        type="text"
+        type="number"
         class="form-control"
         placeholder="Starting price"
         formControlName="startingPrice"
@@ -79,9 +79,7 @@
       <div class="d-flex gap-3">
         <img
           class="detail-img"
-          [src]="
-            'https://primefaces.org/cdn/primeng/images/demo/product/black-watch.jpg'
-          "
+          [src]="detailObject.images"
           [alt]="detailObject.title"
         />
         <div class="d-flex flex-column">

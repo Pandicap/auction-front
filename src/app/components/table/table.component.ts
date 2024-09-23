@@ -30,22 +30,22 @@ export class TableComponent {
 
   ngOnInit() {
     this.sortByBidOptions = [
-      { label: 'Last Bid High to Low', value: '!lastBidAmount' },
-      { label: 'Last Bid Low to High', value: 'lastBidAmount' },
+      { label: 'Last Bid High to Low', value: '!lastestBid' },
+      { label: 'Last Bid Low to High', value: 'lastestBid' },
     ];
   }
 
   onSortChange(event: any) {
     console.log('event ', event, event.target.value);
-    // let value = event.value;
-    //
-    // if (value.indexOf('!') === 0) {
-    //   this.sortOrder = -1;
-    //   this.sortField = value.substring(1, value.length);
-    // } else {
-    //   this.sortOrder = 1;
-    //   this.sortField = value;
-    // }
+    let value = event.target.value;
+
+    if (value.indexOf('!') === 0) {
+      this.sortOrder = -1;
+      this.sortField = value.substring(1, value.length);
+    } else {
+      this.sortOrder = 1;
+      this.sortField = value;
+    }
   }
 
   addNew() {
@@ -55,4 +55,5 @@ export class TableComponent {
   openDetails(itemId: number) {
     this.onOpenDetails.emit(itemId);
   }
+
 }

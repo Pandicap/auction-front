@@ -15,4 +15,9 @@ export class AuthService {
   signup(data: any) {
     return this.httpClient.post(`${this.baseUrl}/auth/register`, data);
   }
+
+  getCurrentUser() {
+    return this.httpClient.get(`${this.baseUrl}/users/current-user`);
+  }
+
 }
